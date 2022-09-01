@@ -5,7 +5,6 @@ const loadData = async(searchText) => {
   displayPhones(data.data);
 }
 
-
 const displayPhones = phones => {
   console.log(phones);
   // phones = phones.slice(0,20);
@@ -34,19 +33,27 @@ const displayPhones = phones => {
       </div>
     `
     phoneContainer.appendChild(mobileDiv);
+    toggleSpnier(false);
   })
 }
 
-
-
 const searchBtn = document.getElementById('btn-search');
 searchBtn.addEventListener('click', function(){
+  toggleSpnier(true);
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
   console.log('search button clicked', searchText);
   loadData(searchText);
 })
 
-
+const toggleSpnier = isloading => {
+  const loader = document.getElementById('loader');
+  if(isloading){
+    loader.classList.remove('d-none');
+  }
+  else{
+    loader.classList.add('d-none');
+  }
+}
 
 loadData();
