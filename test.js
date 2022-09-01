@@ -5,18 +5,29 @@ const loadData = async(searchText) => {
   displayPhones(data.data);
 }
 
+//displaye phone and appending child
 const displayPhones = phones => {
   console.log(phones);
-  // phones = phones.slice(0,20);
+  
+  const showall = document.getElementById('show-all');
+  if(phones.length >= 10){
+    phones = phones.slice(0,10);
+    showall.classList.remove('d-none');
+  }
+  else{
+    showall.classList.add('d-none');
+  }
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.innerHTML = ``
   // no found message
   const warningText = document.getElementById('no-found-msg');
   if(phones.length === 0) {
-    warningText.classList.remove('d-none')
+    warningText.classList.remove('d-none');
+    toggleSpnier(false);
   }
   else{
-    warningText.classList.add('d-none')
+    warningText.classList.add('d-none');
+
   }
   phones.forEach(phone => {
     console.log(phone)
@@ -37,6 +48,7 @@ const displayPhones = phones => {
   })
 }
 
+//search button clicked
 const searchBtn = document.getElementById('btn-search');
 searchBtn.addEventListener('click', function(){
   toggleSpnier(true);
@@ -46,6 +58,7 @@ searchBtn.addEventListener('click', function(){
   loadData(searchText);
 })
 
+//spninner condition
 const toggleSpnier = isloading => {
   const loader = document.getElementById('loader');
   if(isloading){
