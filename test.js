@@ -11,6 +11,14 @@ const displayPhones = phones => {
   // phones = phones.slice(0,20);
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.innerHTML = ``
+  // no found message
+  const warningText = document.getElementById('no-found-msg');
+  if(phones.length === 0) {
+    warningText.classList.remove('d-none')
+  }
+  else{
+    warningText.classList.add('d-none')
+  }
   phones.forEach(phone => {
     console.log(phone)
     const mobileDiv = document.createElement('div');
@@ -38,5 +46,7 @@ searchBtn.addEventListener('click', function(){
   console.log('search button clicked', searchText);
   loadData(searchText);
 })
+
+
 
 loadData();

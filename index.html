@@ -12,7 +12,7 @@
 </head>
 <body>
   <header class="container py-4">
-    <h1 class="fs-1 pb-3">Choice your <span>Favorite phone</span></h1>
+    <h1 class="fs-1 pb-3 text-center">Choice your <span>Favorite phone</span></h1>
     <!-- search box -->
     <div class="input-group">
       <input id="search-field" type="text" class="form-control" placeholder="Search this blog">
@@ -21,6 +21,12 @@
           <i class="fa fa-search"></i>
         </button>
       </div>
+    </div>
+    <!-- warning message -->
+    <div id="no-found-msg" class="mt-4 d-none text-center"><h2 class="text-warning">No phone was found. Search again</h2></div>
+    <!-- spinner -->
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </header>
   <main>
