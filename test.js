@@ -17,6 +17,7 @@ const displayPhones = phones => {
   else{
     showall.classList.add('d-none');
   }
+  
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.innerHTML = ``
   // no found message
@@ -68,5 +69,14 @@ const toggleSpnier = isloading => {
     loader.classList.add('d-none');
   }
 }
+
+// Enterbutton manipulation
+const searchOption = document.getElementById('search-field');
+searchOption.addEventListener('keydown', function(e){
+  console.log(e.key);
+  if(e.key === 'Enter'){
+    console.log('if kaj kortece')
+  }
+})
 
 loadData();
