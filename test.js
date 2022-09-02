@@ -7,8 +7,6 @@ const loadData = async(searchText) => {
 
 //displaye phone and appending child
 const displayPhones = phones => {
-  console.log(phones);
-  
   const showall = document.getElementById('show-all');
   if(phones.length >= 10){
     phones = phones.slice(0,10);
@@ -31,7 +29,6 @@ const displayPhones = phones => {
 
   }
   phones.forEach(phone => {
-    console.log(phone)
     const mobileDiv = document.createElement('div');
     mobileDiv.classList.add('col');
     mobileDiv.innerHTML = `
@@ -42,6 +39,7 @@ const displayPhones = phones => {
         <h5 class="card-title">${phone.brand}</h5>
         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
         </div>
+        <button onclick="loadphoneDetails('${phone.slug}')" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal">Details</button>
       </div>
     `
     phoneContainer.appendChild(mobileDiv);
@@ -55,7 +53,7 @@ searchBtn.addEventListener('click', function(){
   toggleSpnier(true);
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
-  console.log('search button clicked', searchText);
+  // console.log('search button clicked', searchText);
   loadData(searchText);
 })
 
@@ -73,10 +71,24 @@ const toggleSpnier = isloading => {
 // Enterbutton manipulation
 const searchOption = document.getElementById('search-field');
 searchOption.addEventListener('keydown', function(e){
-  console.log(e.key);
-  if(e.key === 'Enter'){
-    console.log('if kaj kortece')
-  }
+  // console.log(e.key);
+  // if(e.key === 'Enter'){
+  //   console.log('if kaj kortece')
+  // }
 })
+
+const loadphoneDetails = async id =>{
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayDetails(data.data);
+}
+const displayDetails = phone =>{
+  const titleModal = document.getElementById('phoneDetailsModalLabel');
+  titleModal.innerText = phone.name;
+  const modalBody = document.getElementById('modal-body');
+  modalBody.innerHTML = `${phone.brand} <br>
+  <img src="${phone.image}">`;
+}
 
 loadData();
